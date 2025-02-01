@@ -46,7 +46,7 @@ struct ContentView: View {
             case "Halloween":
                 currentColor = Color.orange
                 emojis = (halloweenEmojis + halloweenEmojis).shuffled()
-            case "Pink":
+            case "PinkVibe":
                 currentColor = Color.pink
                 emojis = (pinkEmojis + pinkEmojis).shuffled()
             case "Cars":
@@ -69,7 +69,7 @@ struct ContentView: View {
         HStack {
             themeButton(themeName: "Halloween", symbol: "party.popper.fill")
             Spacer()
-            themeButton(themeName: "Pink", symbol: "camera.macro")
+            themeButton(themeName: "PinkVibe", symbol: "camera.macro")
             Spacer()
             themeButton(themeName: "Cars", symbol: "car.fill")
         }
