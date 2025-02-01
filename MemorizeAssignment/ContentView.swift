@@ -12,7 +12,7 @@ struct ContentView: View {
     let pinkEmojis = ["🧞‍♀️", "🎀", "👛", "🌷", "🦩", "🎟️", "💘", "💕"]
     let carsEmojis = ["🚗", "🚘", "🚙", "🚓", "🚔", "🚕", "🚖", "🏎️"]
     
-    @State var emojis: [String] = ["👻", "🦇", "🎃", "💀", "🕷️", "🧟‍♂️", "🕸️", "👹"]
+    @State var emojis: [String] = ["👻", "🦇", "🎃", "💀", "🕷️", "🧟‍♂️", "🕸️", "👹", "👻", "🦇", "🎃", "💀", "🕷️", "🧟‍♂️", "🕸️", "👹"]
         
     @State var currentColor = Color.orange
     
@@ -22,12 +22,9 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .foregroundColor(currentColor)
                 .fontWeight(.black)
-            
-            ScrollView {
-                cards
-                cards
-            }
-            
+            Spacer()
+            cards
+            Spacer()
             themes
         }
         .padding()
@@ -43,34 +40,38 @@ struct ContentView: View {
         .foregroundColor(currentColor)
     }
     
-    func themeButton(themeName: String) -> some View {
+    func themeButton(themeName: String, symbol: String) -> some View {
         Button(action: {
             switch themeName {
             case "Halloween":
                 currentColor = Color.orange
-                emojis = halloweenEmojis
+                emojis = (halloweenEmojis + halloweenEmojis).shuffled()
             case "Pink":
                 currentColor = Color.pink
-                emojis = pinkEmojis
+                emojis = (pinkEmojis + pinkEmojis).shuffled()
             case "Cars":
                 currentColor = Color.blue
-                emojis = carsEmojis
+                emojis = (carsEmojis + carsEmojis).shuffled()
             default:
                 currentColor = Color.orange
-                emojis = halloweenEmojis
+                emojis = (halloweenEmojis + halloweenEmojis).shuffled()
             }
         },label: {
-            Text(themeName)
+            VStack {
+                Image(systemName: symbol)
+                    .imageScale(.large)
+                Text(themeName)
+            }
         })
     }
     
     var themes: some View {
         HStack {
-            themeButton(themeName: "Halloween")
+            themeButton(themeName: "Halloween", symbol: "party.popper.fill")
             Spacer()
-            themeButton(themeName: "Pink")
+            themeButton(themeName: "Pink", symbol: "camera.macro")
             Spacer()
-            themeButton(themeName: "Cars")
+            themeButton(themeName: "Cars", symbol: "car.fill")
         }
         .padding()
     }
@@ -79,7 +80,7 @@ struct ContentView: View {
 struct CardView: View {
     let content: String
     
-    @State var isFaceUp = true
+    @State var isFaceUp = false
     
     let base = RoundedRectangle(cornerRadius: 12)
     
