@@ -66,7 +66,7 @@ struct ContentView: View {
     }
     
     var themes: some View {
-        HStack {
+        HStack(alignment: .bottom) {
             themeButton(themeName: "Halloween", symbol: "party.popper.fill")
             Spacer()
             themeButton(themeName: "PinkVibe", symbol: "camera.macro")
